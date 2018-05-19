@@ -1,0 +1,14 @@
+{
+    "name": "cenatiempo/mileage",
+    "authors": [
+        {
+            "name": "Devin Cenatiempo",
+            "email": "dcenatiempo@gmail.com"
+        }
+    ],
+    "require": {
+        "filp/whoops": "^2.1",
+        "vlucas/phpdotenv": "~1.1",
+        "illuminate/database": "5.1.*"
+    }
+}
