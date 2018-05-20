@@ -1,7 +1,13 @@
 <?php require("../views/head.php"); ?>
   <div class="auth register">
     <h2>Create Account</h2>
-    <form>
+      <?php 
+        if (isset($_SESSION['warning'])) {
+          require("../views/warning.php");
+          unset($_SESSION['warning']);
+        }
+      ?>
+    <form method="post">
       <label for="email">Email</label>
       <input type="email" name="email" placeholder="enter email address"/>
       <label for="confirm-email">Confirm Email</label>
