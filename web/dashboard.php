@@ -92,8 +92,7 @@ if (!isset($_SESSION['current-vehicle'])) {
 $mileageListQuery = $db->prepare("SELECT m.date, m.startmileage, m.endmileage, c.name as category FROM public.mileage m JOIN public.category c ON m.categoryid = c.id WHERE vehicleid = ?");
 $mileageListQuery->execute(array($_SESSION['current-vehicle']['vehicleid']));
 $mileageList = $mileageListQuery->fetchAll(PDO::FETCH_ASSOC);
-var_dump($mileageList);
-
+// var_dump($mileageList);
 
 //////////////////////////
 // GET CATEGORY LIST
