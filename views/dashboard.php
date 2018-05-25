@@ -1,5 +1,6 @@
-<?php require("../views/head.php"); ?>
+<?php require_once("../views/head.php"); ?>
   <h1>Dashboard</h1>
-  <h3>You have no vehicles. Please add one below.</h3>
-  <button>Add Vehicle</button>
-<?php require("../views/foot.php"); ?>
+  <?php require_once("../views/vehicleMileageList.php"); ?>
+  <?php require_once("../views/addVehicle.php"); ?>
+  <?php require_once("../views/changeVehicle.php"); ?>
+<?php require_once("../views/foot.php"); ?>

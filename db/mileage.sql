@@ -13,12 +13,18 @@ ALTER TABLE ONLY public."user"
 ALTER TABLE ONLY public."user"
     ADD CONSTRAINT user_email_key UNIQUE (email);
 
+CREATE TABLE public.model (
+    id     SERIAL          NOT NULL
+    ,year  INTEGER         NOT NULL
+    ,make  VARCHAR(50)
+    ,model VARCHAR(50)     NOT NULL
+);
+ALTER TABLE ONLY public.model
+    ADD CONSTRAINT model_pkey PRIMARY KEY (id);
 
 CREATE TABLE public.vehicle (
     id         SERIAL       NOT NULL
-    ,make      VARCHAR(255) NOT NULL
-    ,model     VARCHAR(255) NOT NULL
-    ,year      INTEGER      NOT NULL
+    ,vehicleid INTEGER      NOT NULL
     ,color     VARCHAR(255) NOT NULL
     ,vin       VARCHAR(255) NOT NULL
     ,preferred boolean      NOT NULL
@@ -28,6 +34,8 @@ ALTER TABLE ONLY public.vehicle
     ADD CONSTRAINT vehicle_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.vehicle
     ADD CONSTRAINT vehicle_userid_fkey FOREIGN KEY (userid) REFERENCES public."user"(id);
+ALTER TABLE ONLY public.vehicle
+    ADD CONSTRAINT vehicle_model_fkey FOREIGN KEY (userid) REFERENCES public.model(id);
 
 CREATE TABLE public.category (
     id      SERIAL       NOT NULL
@@ -53,6 +61,12 @@ ALTER TABLE ONLY public.mileage
     ADD CONSTRAINT mileage_categoryid_fkey FOREIGN KEY (categoryid) REFERENCES public.category(id);
 ALTER TABLE ONLY public.mileage
     ADD CONSTRAINT mileage_vehicleid_fkey FOREIGN KEY (vehicleid) REFERENCES public.vehicle(id);
+
+
+-- Permissions
+GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO public;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO public;
+
 
 -- INSERT INTO public."user"
 --   ( password, email, name)

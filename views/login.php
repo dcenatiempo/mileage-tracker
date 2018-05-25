@@ -1,4 +1,4 @@
-<?php require("../views/head.php"); ?>
+<?php require_once("../views/head.php"); ?>
   <div class="auth login">
     <h2>Sign In</h2>
     <?php 
@@ -16,4 +16,4 @@
     </form>
     <a href="./register.php">New User Registration</a>
   </div>
-<?php require("../views/foot.php"); ?>
+<?php require_once("../views/foot.php"); ?>

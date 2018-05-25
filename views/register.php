@@ -1,4 +1,4 @@
-<?php require("../views/head.php"); ?>
+<?php require_once("../views/head.php"); ?>
   <div class="auth register">
     <h2>Create Account</h2>
       <?php 
@@ -19,4 +19,4 @@
       <input type="submit" value="Register">
     </form>
   </div>
-<?php require("../views/foot.php"); ?>
+<?php require_once("../views/foot.php"); ?>
