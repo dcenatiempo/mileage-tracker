@@ -10,5 +10,5 @@
   </head>
   <body>
     <div class="page-wrapper">
-      <?php require("../views/header.php"); ?>
+      <?php require_once("../views/header.php"); ?>
       <main>
