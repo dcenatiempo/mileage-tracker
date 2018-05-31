@@ -45,8 +45,8 @@ if (isset($_POST['add-vehicle'])) {
   $userId = (int)$_SESSION['userId'];
 
   // get model id
-  $mIdQuery = $db->query("SELECT id FROM public.model WHERE make = '{$make}' AND model = '{$model}' AND year = '{$year}';");
-  $mIdQuery->execute();
+  $mIdQuery = $db->prepare("SELECT id FROM public.model WHERE make = ? AND model = ? AND year = ?;");
+  $mIdQuery->execute(array([$make, $model, $year]));
   $result = $mIdQuery->fetchAll(PDO::FETCH_NUM);
   $mId = $result[0][0];
 
@@ -81,8 +81,8 @@ if (isset($_POST['edit-vehicle'])) {
   $userId = (int)$_SESSION['userId'];
   $vId = (int)$_SESSION['current-vehicle']['vehicleid'];
   // get model id
-  $mIdQuery = $db->query("SELECT id FROM public.model WHERE make = '{$make}' AND model = '{$model}' AND year = '{$year}';");
-  $mIdQuery->execute();
+  $mIdQuery = $db->prepare("SELECT id FROM public.model WHERE make = ? AND model = ? AND year = ?;");
+  $mIdQuery->execute(array([$make, $model, $year]));
   $result = $mIdQuery->fetchAll(PDO::FETCH_NUM);
   $mId = $result[0][0];
 
@@ -104,8 +104,8 @@ if (isset($_POST['edit-vehicle'])) {
 //////////////////////////
 // GET VEHICLE LIST
 //////////////////////////
-$vehicleListQuery = $db->query("SELECT v.id AS vehicleid, v.modelid, v.color, v.vin, v.preferred, v.userid, m.year, m.make, m.model FROM public.vehicle v JOIN public.model m ON v.modelid = m.id WHERE v.userid = '{$_SESSION['userId']}';");
-$vehicleListQuery->execute();
+$vehicleListQuery = $db->prepare("SELECT v.id AS vehicleid, v.modelid, v.color, v.vin, v.preferred, v.userid, m.year, m.make, m.model FROM public.vehicle v JOIN public.model m ON v.modelid = m.id WHERE v.userid = ?;");
+$vehicleListQuery->execute([$_SESSION['userId']]);
 $vehicleList = $vehicleListQuery->fetchAll(PDO::FETCH_ASSOC);
 // if ($vehicleList != false) {
 //   // print_r($vehicleList);

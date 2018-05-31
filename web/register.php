@@ -25,8 +25,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // TODO: if validation passes, continue, else stay on register page with warnings
 
   // check to make sure email does not exist
-  $emailQuery = $db->query("SELECT email FROM public.\"user\" WHERE (email = '{$email}');");
-  $emailQuery->execute();
+  $emailQuery = $db->prepare("SELECT email FROM public.\"user\" WHERE email = ?;");
+  $emailQuery->execute(array([$email]));
   $result = $emailQuery->fetch(PDO::FETCH_ASSOC);
   
   if ($result == true) {
