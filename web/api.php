@@ -1,4 +1,5 @@
 <?php
+header('Content-type: application/json');
 
 function getModels($db, $make) {
   $modelQuery = $db->query("SELECT DISTINCT model FROM public.model WHERE make = '{$make}' ORDER BY model;");
@@ -18,28 +19,17 @@ function getYears($db, $make, $model) {
 
 }
 
+//////////////////////////
+// MAKE/MODEL/YEAR HANDLER
+//////////////////////////
 if (isset($_GET['make'])) {
   require_once("../util/dbConnect.php");
 
   if (isset($_GET['model'])) {
-
-    if (isset($_GET['year'])) {
-      // Return single id for make, model, year
-      // getID($_GET['make'], $_GET['model'], $_GET['year']);
-      echo "[]";
-    }
-    else {
-      // Return all years for make and model
       getYears($db, $_GET['make'], $_GET['model']);
-    }
-
   }
   else {
     // Return all models for make
     getModels($db, $_GET['make']);
   }
-
 }
-
-
-
