@@ -3,7 +3,7 @@ header('Content-type: application/json');
 
 function getModels($db, $make) {
   $modelQuery = $db->prepare("SELECT DISTINCT model FROM public.model WHERE make = ? ORDER BY model;");
-  $modelQuery->execute(array([$make]));
+  $modelQuery->execute([$make]);
   $result = $modelQuery->fetchAll(PDO::FETCH_NUM);
 
   echo json_encode($result);
@@ -12,7 +12,7 @@ function getModels($db, $make) {
 
 function getYears($db, $make, $model) {
   $yearQuery = $db->prepare("SELECT DISTINCT year FROM public.model WHERE make = ? AND model = ? ORDER BY year;");
-  $yearQuery->execute(array([$make, $model]));
+  $yearQuery->execute([$make, $model]);
   $result = $yearQuery->fetchAll(PDO::FETCH_NUM);
 
   echo json_encode($result);
