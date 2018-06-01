@@ -40,7 +40,7 @@ function closeChangeVehicleModal (e) {
 }
 
 ////////////////////////////
-// Add Vehicle Modal
+// "Add Vehicle" Modal
 ///////////////////////////
 document.addEventListener('DOMContentLoaded', ()=>{
 
@@ -66,6 +66,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 function openAddVehicleModal(e) {
   var addVehicleModal = document.querySelector('div.add-vehicle');
+
+  // Update to "Add Vehicle"
+  let header = addVehicleModal.querySelector('header h2');
+  let submit = addVehicleModal.querySelector('footer button.submit');
+  let toggle = addVehicleModal.querySelector('input.toggle');
+  header.innerText = "Add Vehicle";
+  submit.innerText = "Add Vehicle";
+  toggle.name = "add-vehicle";
+
   addVehicleModal.removeAttribute('hidden');
 }
 
@@ -74,10 +83,14 @@ function closeAddVehicleModal (e) {
   addVehicleModal.setAttribute('hidden', '');
   clearList("model");
   clearList("year");
-  // reset make
-  // reset color
-  // reset vin
-  // reset primary
+  let make = addVehicleModal.querySelector('#make');
+  make.value = '';
+  let color = addVehicleModal.querySelector('#color');
+  color.value = 'Select Color';
+  let vin = addVehicleModal.querySelector('#vin');
+  vin.value = '';
+  let preferred = addVehicleModal.querySelector('#preferred');
+  preferred.checked = false;
 }
 
 function fetchModel(e) {
@@ -135,4 +148,142 @@ function clearList(item) {
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
+////////////////////////////
+// "Add Mileage" Button
+///////////////////////////
+document.addEventListener('DOMContentLoaded', ()=>{
+
+  var addMileageBtn = document.querySelector('button.add-mileage');
+  if (addMileageBtn) {
+
+    let mileageTable = document.querySelector('table.mileage');
+    let date = mileageTable.querySelector('input[date]');
+    let start = mileageTable.querySelector('input[start]');
+    let end = mileageTable.querySelector('input[end]');
+    let total = mileageTable.querySelector('span[total]');
+    let category = mileageTable.querySelector('select[category]');
+
+    addMileageBtn.addEventListener('click', e => {
+      window.location = `dashboard.php?add-mileage=1&date=${date.value}&start=${start.value}&end=${end.value}&category=${category.value}`;
+    });
+    date.addEventListener('change', validateAddMileage);
+    start.addEventListener('change', handleMileageChange);
+    end.addEventListener('change', handleMileageChange);
+    category.addEventListener('change', validateAddMileage);
+
+    function handleMileageChange () {
+      var sum = end.value - start.value;
+      sum = sum >=0 ? sum : 0;
+      console.log(sum);
+      total.innerText = sum;
+      validateAddMileage();
+    }
+
+    function validateAddMileage () {
+      if (date.value && total.innerHTML > 0 && category.value) {
+        addMileageBtn.removeAttribute('disabled');
+      }
+      else {
+        addMileageBtn.setAttribute('disabled','');
+      }
+    }
+
+  }
+
+  var addVehicleModalBtn = document.querySelector('button.add-vehicle');
+  if (addVehicleModalBtn) {
+    addVehicleModalBtn.addEventListener('click', openAddVehicleModal);
+  }
+
+});
+
+
+////////////////////////////
+// "Edit Vehicle" Button
+///////////////////////////
+document.addEventListener('DOMContentLoaded', () => {
+  var editVehicleButton = document.querySelector('button.edit-vehicle');
+
+  if (editVehicleButton) {
+    editVehicleButton.addEventListener('click', openEditVehicleModal);
+  }
+});
+
+function openEditVehicleModal () {
+  var editVehicleModal = document.querySelector('div.add-vehicle');
+
+  let make = editVehicleModal.querySelector('#make');
+  let model = editVehicleModal.querySelector('#model');
+  let year = editVehicleModal.querySelector('#year');
+  let color = editVehicleModal.querySelector('#color');
+  let vin = editVehicleModal.querySelector('#vin');
+  let preferred = editVehicleModal.querySelector('#preferred');
+
+  let header = editVehicleModal.querySelector('header h2');
+  let submit = editVehicleModal.querySelector('footer button.submit');
+  let toggle = editVehicleModal.querySelector('input.toggle');
+
+  // Update to "Edit Vehicle"
+  header.innerText = "Edit Vehicle";
+  submit.innerText = "Edit Vehicle";
+  toggle.name = "edit-vehicle";
+  
+  // fetch & set data
+  var vehicle = document.querySelector('div[vehicle]')
+                        .getAttribute('vehicle');
+  vehicle = JSON.parse(vehicle);
+
+  fetch(`./api.php?make=${vehicle.make}`)
+  .then( resp => {
+    return resp.json();
+  }).then ( models => {
+    listOptions(models, "model");
+    model.value = vehicle.model;
+  });
+
+  fetch(`./api.php?make=${vehicle.make}&model=${vehicle.model}`)
+  .then( resp => {
+    return resp.json();
+  }).then ( years => {
+    listOptions(years, "year");
+    year.value = vehicle.year;
+  });
+
+  make.value = vehicle.make;
+  vin.value = vehicle.vin;
+  color.value = vehicle.color;
+  preferred.checked = vehicle.preferred;
+
+  // show modal
+  editVehicleModal.removeAttribute('hidden');
+}
+
+////////////////////////////
+// "Delete Vehicle" Modal
+///////////////////////////
+document.addEventListener('DOMContentLoaded', () => {
+  var deleteVehicleButton = document.querySelector('button.delete-vehicle');
+  var cancelDeleteVehicleButton = document.querySelector('div.delete-vehicle button.cancel');
+
+  if (deleteVehicleButton) {
+    deleteVehicleButton.addEventListener('click', openDeleteVehicleModal);
+  }
+  if (cancelDeleteVehicleButton) {
+    cancelDeleteVehicleButton.addEventListener('click', closeDeleteVehicleModal);
+  }
+});
+
+function openDeleteVehicleModal () {
+  var deleteVehicleModal = document.querySelector('div.delete-vehicle');
+  // show modal
+  deleteVehicleModal.removeAttribute('hidden');
+}
+
+function closeDeleteVehicleModal () {
+  var deleteVehicleModal = document.querySelector('div.delete-vehicle');
+  // show modal
+  deleteVehicleModal.setAttribute('hidden', '');
 }

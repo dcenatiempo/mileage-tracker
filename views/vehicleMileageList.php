@@ -6,9 +6,16 @@ if ($vehicleList == null) {
 }
 else {
   echo "<button class='btn add-vehicle'>Add Vehicle</button>";
+  if (count($vehicleList) > 1) {
+    echo "<button class='btn change-vehicle'>Change Vehicle</button>";
+  }
 
   // print_r($_SESSION['current-vehicle']);
-  echo "<h2>{$_SESSION['current-vehicle']['year']} {$_SESSION['current-vehicle']['color']} {$_SESSION['current-vehicle']['make']} {$_SESSION['current-vehicle']['model']}</h2>";
+  echo "<h2>";
+    echo "{$_SESSION['current-vehicle']['year']} {$_SESSION['current-vehicle']['color']} {$_SESSION['current-vehicle']['make']} {$_SESSION['current-vehicle']['model']}";
+    echo "<button class='btn edit edit-vehicle'></button>";
+    echo "<button class='btn delete delete-vehicle'></button>";
+  echo "</h2>";
   echo "<table class='mileage'>";
     echo "<tr>";
       echo "<th>Date</th>";
@@ -19,17 +26,17 @@ else {
       echo "<th></th>";
     echo "</tr>";
     echo "<tr>";
-      echo "<td><input type='date'/></td>";
-      echo "<td><input type='number'/></td>";
-      echo "<td><input type='number'/></td>";
-      echo "<td><span class='total'></span></td>";
-      echo "<td><select>";
-        echo "<option>Select Category</option>";
+      echo "<td><input date type='date'/></td>";
+      echo "<td><input start type='number'/></td>";
+      echo "<td><input end type='number'/></td>";
+      echo "<td><span  total class='total'></span></td>";
+      echo "<td><select category>";
+        echo "<option value=''>Select Category</option>";
         foreach ($categoryList as $category) {
-          echo "<option>{$category['name']}</option>";
+          echo "<option value='{$category['id']}'>{$category['name']}</option>";
         }
       echo "</select></td>";
-      echo "<td><button>Add</button></td>";
+      echo "<td><button disabled class='btn add-mileage'>Add</button></td>";
     echo "</tr>";
     foreach ($mileageList as $mileageItem) {
       echo "<tr>";
@@ -44,7 +51,5 @@ else {
     }
 
   echo "</table>";
-  // echo "<button class='btn edit-vehicle'>Edit Vehicle</button>";
-  echo "<button class='btn change-vehicle'>Change Vehicle</button>";
 }
 ?>

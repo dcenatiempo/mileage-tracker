@@ -35,8 +35,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // TODO: if validation passes, continue, else stay on register page with warnings
 
   // Check to see if user exist
-  $userQuery = $db->query("SELECT hashpass, salt, id FROM public.\"user\" WHERE (email = '{$email}');");
-  $userQuery->execute();
+  $userQuery = $db->prepare("SELECT hashpass, salt, id FROM public.\"user\" WHERE email = ?;");
+  $userQuery->execute([$email]);
   $result = $userQuery->fetch(PDO::FETCH_ASSOC);
   
   if ($result == false) {

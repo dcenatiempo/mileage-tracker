@@ -25,8 +25,8 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // TODO: if validation passes, continue, else stay on register page with warnings
 
   // check to make sure email does not exist
-  $emailQuery = $db->query("SELECT email FROM public.\"user\" WHERE (email = '{$email}');");
-  $emailQuery->execute();
+  $emailQuery = $db->prepare("SELECT email FROM public.\"user\" WHERE email = ?;");
+  $emailQuery->execute([$email]);
   $result = $emailQuery->fetch(PDO::FETCH_ASSOC);
   
   if ($result == true) {
@@ -46,7 +46,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
       (email, salt, hashpass)
       VALUES
      (?, ?, ?)');
-    $success = $statement->execute(array($email, $salt, $hashPass));
+    $success = $statement->execute([$email, $salt, $hashPass]);
 
     if (!$success) {
       // if problems with insert, stay on register page with warnings
@@ -65,7 +65,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ("name", userid)
         VALUES
        (\'Personal\', ?),(\'Business\', ?)');
-      $success = $statement->execute(array($_SESSION['userId'],$_SESSION['userId']));
+      $success = $statement->execute([$_SESSION['userId'],$_SESSION['userId']]);
       // redirect to dashboard
       header("Location: dashboard.php");
       exit();

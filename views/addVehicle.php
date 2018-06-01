@@ -3,7 +3,7 @@
     <h2>Add Vehicle</h2>
   </header>
   <form id='add-vehicle-form' method='post'>
-    <input type="checkbox"name="add-vehicle" checked hidden/>
+    <input class="toggle" type="checkbox"name="add-vehicle" checked hidden/>
     <select name='make' id='make' form='add-vehicle-form'>
       <?php require('makes.php')?>
     </select>
@@ -26,14 +26,14 @@
       <option value="Purple">Purple</option>
       <option value="Orange">Orange</option>
     </select>
-    <input type="text" name="vin" placeholder="VIN"/>
+    <input id="vin" type="text" name="vin" placeholder="VIN"/>
     <span>
       <input type="checkbox" name="preferred" id="preferred"/>
       <label for="preferred">Primary Vehicle</label>
     </span>
     <footer>
       <button class="btn cancel" type='button'>Cancel</button>
-      <button class="btn">Add Vehicle</button>
+      <button class="btn submit">Add Vehicle</button>
     </footer>
   </form>
 </div>
