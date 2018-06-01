@@ -11,7 +11,11 @@ else {
   }
 
   // print_r($_SESSION['current-vehicle']);
-  echo "<h2>{$_SESSION['current-vehicle']['year']} {$_SESSION['current-vehicle']['color']} {$_SESSION['current-vehicle']['make']} {$_SESSION['current-vehicle']['model']}<button class='btn edit edit-vehicle'></button></h2>";
+  echo "<h2>";
+    echo "{$_SESSION['current-vehicle']['year']} {$_SESSION['current-vehicle']['color']} {$_SESSION['current-vehicle']['make']} {$_SESSION['current-vehicle']['model']}";
+    echo "<button class='btn edit edit-vehicle'></button>";
+    echo "<button class='btn delete delete-vehicle'></button>";
+  echo "</h2>";
   echo "<table class='mileage'>";
     echo "<tr>";
       echo "<th>Date</th>";

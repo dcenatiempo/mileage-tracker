@@ -4,4 +4,5 @@
   <?php require_once("../views/vehicleMileageList.php"); ?>
   <?php require_once("../views/addVehicle.php"); ?>
   <?php require_once("../views/changeVehicle.php"); ?>
+  <?php require_once("../views/deleteVehicle.php"); ?>
 <?php require_once("../views/foot.php"); ?>

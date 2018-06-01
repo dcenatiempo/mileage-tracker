@@ -2,12 +2,6 @@
 
 $dbUrl = getenv('DATABASE_URL');
 
- $dbopts = parse_url($dbUrl);
- 
- $dbHost = $dbopts["host"];
-
-$dbopts = parse_url($dbUrl);
-
 $dbHost = $dbopts["host"];
 $dbPort = $dbopts["port"];
 $dbUser = $dbopts["user"];

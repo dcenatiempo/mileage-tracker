@@ -260,3 +260,30 @@ function openEditVehicleModal () {
   // show modal
   editVehicleModal.removeAttribute('hidden');
 }
+
+////////////////////////////
+// "Delete Vehicle" Modal
+///////////////////////////
+document.addEventListener('DOMContentLoaded', () => {
+  var deleteVehicleButton = document.querySelector('button.delete-vehicle');
+  var cancelDeleteVehicleButton = document.querySelector('div.delete-vehicle button.cancel');
+
+  if (deleteVehicleButton) {
+    deleteVehicleButton.addEventListener('click', openDeleteVehicleModal);
+  }
+  if (cancelDeleteVehicleButton) {
+    cancelDeleteVehicleButton.addEventListener('click', closeDeleteVehicleModal);
+  }
+});
+
+function openDeleteVehicleModal () {
+  var deleteVehicleModal = document.querySelector('div.delete-vehicle');
+  // show modal
+  deleteVehicleModal.removeAttribute('hidden');
+}
+
+function closeDeleteVehicleModal () {
+  var deleteVehicleModal = document.querySelector('div.delete-vehicle');
+  // show modal
+  deleteVehicleModal.setAttribute('hidden', '');
+}

@@ -190,7 +190,16 @@ button.edit {
   background-color: transparent;
   margin-left: 5px;
 }
-
+button.delete {
+  background-image: url('https://image.flaticon.com/icons/svg/64/64022.svg');
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 28px;
+  width: 28px;
+  background-color: transparent;
+  margin-left: 5px;
+}
 div.pop-up button.cancel {
   
 }
