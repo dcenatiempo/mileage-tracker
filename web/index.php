@@ -12,6 +12,14 @@ if (isset($_GET['logout']) && $_GET['logout'] == 'true' ) {
 }
 
 //////////////////////////
+// RE-DIRECT TO DASHBOARD IF LOGGED IN
+//////////////////////////
+if (isset($_SESSION['userId'])) {
+  header("Location: dashboard.php");
+  exit();
+}
+
+//////////////////////////
 // NORMAL PAGE LOAD
 //////////////////////////
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

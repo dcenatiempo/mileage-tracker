@@ -2,6 +2,14 @@
 require_once(__DIR__ . "/../util/init.php");
 
 //////////////////////////
+// RE-DIRECT TO DASHBOARD IF LOGGED IN
+//////////////////////////
+if (isset($_SESSION['userId'])) {
+  header("Location: dashboard.php");
+  exit();
+}
+
+//////////////////////////
 // NORMAL PAGE LOAD
 //////////////////////////
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

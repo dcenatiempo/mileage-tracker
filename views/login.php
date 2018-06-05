@@ -9,9 +9,9 @@
     ?>
     <form method="post">
       <label for="email">Email</label>
-      <input type="email" name="email" placeholder="enter email address"/>
+      <input type="email" name="email" placeholder="enter email address" required/>
       <label for="password">password</label>
-      <input type="password" name="password"/>
+      <input type="password" name="password" required/>
       <input type="submit" value="login">
     </form>
     <a href="./register.php">New User Registration</a>

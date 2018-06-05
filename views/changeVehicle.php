@@ -2,7 +2,7 @@
   <header>
     <h2>Change Vehicle</h2>
   </header>
-  <form id='change-vehicle-form' method='post'>
+  <form id='change-vehicle-form' method='get'>
     <input type="checkbox"name="change-vehicle" checked hidden/>
     <?php include_once('changeVehicleList.php'); ?>
     <footer>
