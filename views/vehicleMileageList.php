@@ -46,7 +46,7 @@ else {
         $total = $mileageItem['endmileage'] - $mileageItem['startmileage'];
         echo "<td>{$total}</td>";
         echo "<td>{$mileageItem['category']}</td>";
-        echo "<td><button>edit</button></td>";
+        echo "<td></td>";
       echo "</tr>";
     }
 
